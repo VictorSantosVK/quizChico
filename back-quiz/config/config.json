@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "VictorS2004XY!",
+    "database": "victorsantosdb",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "VictorS2004XY!",
+    "database": "victorsantosdb",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "VictorS2004XY!",
+    "database": "victorsantosdb",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
