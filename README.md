@@ -18,7 +18,7 @@ Git
 
 1. Clone o Repositório
 bash
-git clone https://github.com/seu-usuario/quiz-chico.git
+git clone https://github.com/VictorSantosVK/quizChico/tree/master
 cd quiz-chico
 2. Instale as Dependências
 bash
