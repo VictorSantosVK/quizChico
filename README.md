@@ -60,7 +60,6 @@ cd front-quiz
 python -m http.server 8000
 Acesse: http://localhost:8000
 
-📂 Estrutura de Diretórios
 quiz-chico/
 ├── back-quiz/               # Backend Node.js
 │   ├── config/
