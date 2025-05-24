@@ -1,4 +1,4 @@
-// Adicione isto no início do seu app.js para tornar as funções globais
+
 window.editQuiz = function (quizId) {
   const quiz = quizzes.find((q) => q.id == quizId);
   if (quiz) {
