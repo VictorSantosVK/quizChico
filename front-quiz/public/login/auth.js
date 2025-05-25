@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Armazena todos os dados necessários
         localStorage.setItem("token", data.token);
         localStorage.setItem("userName", data.user.name);
-        localStorage.setItem("userId", data.user.id); // Certifique-se que o backend envia o ID
+        localStorage.setItem("userId", data.user.id);
         localStorage.setItem("userType", "user");
         
         alert("✅ Login realizado com sucesso!");

@@ -1,0 +1,51 @@
+  .performance-card {
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .performance-card:hover {
+      transform: translateY(-5px);
+    }
+    .progress {
+      height: 10px;
+      
+    }
+    .quiz-history-item {
+      border-left: 4px solid #761db1;
+      transition: all 0.3s;
+    }
+    .quiz-history-item:hover {
+      background-color: #f8f9fa;
+    }
+    .badge-category {
+      background-color: #761db1;
+    }
+    .progress {
+      height: 10px;
+      border-radius: 5px;
+      background-color: #f0e6f9;
+    }
+    .quiz-history-item {
+      transition: all 0.3s ease;
+    }
+    .quiz-history-item:hover {
+      background-color: var(--purple-light);
+    }
+    .badge.bg-purple {
+      background-color: var(--purple-primary) !important;
+    }
+    .card-header {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding: 1rem 1.5rem;
+    }
+    .table {
+      margin-bottom: 0;
+    }
+    .table th {
+      font-weight: 600;
+      color: var(--purple-primary);
+      border-top: none;
+    }
+    .spinner-border.text-purple {
+      color: var(--purple-primary) !important;
+    }

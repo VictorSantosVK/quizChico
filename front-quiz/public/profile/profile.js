@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         historyTable.innerHTML = stats.recentQuizzes.map(quiz => `
           <tr class="quiz-history-item">
             <td><strong>${quiz.title || 'Sem título'}</strong></td>
-            <td><span class="badge badge-category text-white">${quiz.category || 'Geral'}</span></td>
+            <td><span class="badge badge-category text-black">${quiz.category || 'Geral'}</span></td>
             <td>${quiz.completedAt ? new Date(quiz.completedAt).toLocaleDateString('pt-BR') : 'N/D'}</td>
             <td class="text-end">
               <span class="fw-bold ${quiz.score >= 70 ? 'text-success' : quiz.score >= 50 ? 'text-warning' : 'text-danger'}">

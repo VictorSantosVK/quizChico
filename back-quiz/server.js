@@ -59,11 +59,13 @@ class AppServer {
     const questionRoutes = require("./routes/questionRoutes");
     const userStatsRoutes = require("./routes/userStatsRoutes");
     const userQuizRoutes = require("./routes/userQuizroutes");
+    const rankingRoutes = require("./routes/rankingRoutes");
     this.app.use("/api/auth", authRoutes);
     this.app.use("/api/quizzes", quizRoutes);
     this.app.use("/api/questions", questionRoutes);
     this.app.use("/api/users", userStatsRoutes);
     this.app.use("/api/user-quiz", userQuizRoutes);
+    this.app.use("/api/ranking", rankingRoutes);
 
     // Rota de health check
     this.app.get("/api/health", (req, res) => {
@@ -116,7 +118,7 @@ class AppServer {
       await sequelize.authenticate();
       console.log("Database connection established");
 
-      // Sincronização segura (não força recriação)
+      // Sincronização segura
       await sequelize.sync({ alter: false });
       console.log("Database models synchronized");
     } catch (error) {

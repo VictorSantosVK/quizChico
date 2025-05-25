@@ -83,13 +83,7 @@ function renderQuizzes() {
     tr.innerHTML = `
                     <td>${quiz.title}</td>
                     <td>${quiz.category}</td>
-                    <td>
-                        <span class="badge ${
-                          quiz.isActive ? "bg-success" : "bg-danger"
-                        }">
-                            ${quiz.isActive ? "Ativo" : "Inativo"}
-                        </span>
-                    </td>
+                    
                     <td>${quiz.questions?.length || 0}</td>
                     <td>
                         <div class="btn-group">
@@ -395,7 +389,7 @@ async function handleQuizSubmit(e) {
   }
 }
 
-// Função auxiliar para mostrar toasts (notificações)
+// Função para mostrar toasts (notificações)
 function showToast(message, type = "info") {
   const toastContainer =
     document.getElementById("toastContainer") || createToastContainer();
