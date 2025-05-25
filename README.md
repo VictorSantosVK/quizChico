@@ -54,11 +54,7 @@ npm start
 Frontend:
 Abra o arquivo front-quiz/index.html no navegador ou use um servidor local:
 
-bash
-# Se tiver Python instalado
-cd front-quiz
-python -m http.server 8000
-Acesse: http://localhost:8000
+
 
 quiz-chico/
 ├── back-quiz/               # Backend Node.js
