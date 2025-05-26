@@ -21,7 +21,6 @@ bash
 git clone https://github.com/VictorSantosVK/quizChico/tree/master
 cd quiz-chico
 2. Instale as Dependências
-bash
 # Instale as dependências do backend
 cd back-quiz
 npm install
