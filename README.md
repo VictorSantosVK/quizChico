@@ -83,6 +83,8 @@ quiz-chico/
 
 ✅ Histórico de desempenho
 
+✅ Ranking dos usuários
+
 ✅ Painel administrativo
 
 🔧 Dependências Principais
@@ -107,5 +109,3 @@ Css
 Java Script (Para manipulação de DOM)
 
 Bootstrap
-
-Font Awesome
