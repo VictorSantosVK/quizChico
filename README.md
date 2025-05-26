@@ -63,23 +63,30 @@ front-quiz/public/login/login.html
 ```sh
 quiz-chico/
 ├── back-quiz/               # Backend Node.js
-│   ├── config/
-│   ├── controllers/
-│   ├── middlewares/
-│   ├── models/
-│   ├── routes/
-│   ├── .env                 # Arquivo de configuração
-│   └── server.js            # Ponto de entrada
+│   ├── config/              # Configuração do banco de dados
+│   ├── controllers/         # Lógica das rotas
+│   ├── middlewares/         # Validações e autenticações
+│   ├── models/              # Modelos do banco (ORM)
+│   ├── routes/              # Rotas da API
+│   ├── .env                 # Variáveis de ambiente
+│   └── server.js            # Ponto de entrada do backend
 │
 ├── front-quiz/              # Frontend
 │   ├── admin/               # Painel administrativo
-│   ├── Index/               # Página inicial
-│   ├── login/               # Páginas de autenticação
-│   ├── quizes/              # Páginas de quizzes
-│   ├── scripts/             # JavaScript do frontend
-│   └── styles/              # Estilização
+│   │   ├── admin.html
+│   │   ├── app.js
+│   │   └── style.css
+│   │
+│   ├── public/              # Interface pública do usuário
+│   │   ├── index/           # Página inicial
+│   │   ├── login/           # Login e cadastro
+│   │   ├── profile/         # Página de perfil e histórico
+│   │   ├── quizes/          # Página de quizzes
+│   │   └── ranking/        # Página de rankings 
+│   
 │
-└── README.md                # Este arquivo
+└── README.md                # Documentação do projeto
+
 ```
 
 ## 🌟 Funcionalidades 
