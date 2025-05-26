@@ -34,13 +34,10 @@ Crie um banco de dados MYSQL chamado quiz_chico
 
 Configure o arquivo .env na pasta back-quiz:
 
-env
-DB_HOST=localhost
-DB_USER=seu_usuario
-DB_PASS=sua_senha
-DB_NAME=quiz_chico
-JWT_SECRET=sua_chave_secreta_jwt
+.env
 PORT=3001
+JWT_SECRET=meujwtsecret
+JWT_EXPIRES_IN=1d
 4. Execute as Migrações
 bash
 cd back-quiz
