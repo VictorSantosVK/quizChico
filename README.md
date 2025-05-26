@@ -1,6 +1,6 @@
 Quiz Chico - Projeto de Quizzes Interativos
 📋 Visão Geral
-O Quiz Chico é uma plataforma web para criação e realização de quizzes educacionais com:
+O Quiz Chico é uma plataforma web para criação e realização de quizzes com:
 
 Frontend em HTML/CSS/JavaScript
 
@@ -46,11 +46,12 @@ npx sequelize-cli db:migrate
 5. Inicie os Servidores
 Backend:
 
-bash
+5. rode o Backend 
 cd back-quiz
-npm start
+npm run start
+
 Frontend:
-Abra o arquivo front-quiz/index.html no navegador ou use um servidor local:
+Abra o arquivo front-quiz/login.html no navegador ou use um servidor local:
 
 
 
