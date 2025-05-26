@@ -72,6 +72,19 @@ document.getElementById('profileLink')?.addEventListener('click', async (e) => {
   profileModal.show();
 });
 
+// Adiciona a filtragem
+const searchInput = document.getElementById('searchInput');
+searchInput?.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const rows = document.querySelectorAll('.quiz-history-item');
+  
+  rows.forEach(row => {
+    const title = row.querySelector('td')?.textContent?.toLowerCase() || '';
+    row.style.display = title.includes(query) ? '' : 'none';
+  });
+});
+
+
 // Função para carregar os dados do perfil
 async function loadUserProfile() {
   try {
