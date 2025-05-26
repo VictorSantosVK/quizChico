@@ -38,6 +38,7 @@ Configure o arquivo .env na pasta back-quiz:
 PORT=3001
 JWT_SECRET=meujwtsecret
 JWT_EXPIRES_IN=1d
+
 4. Execute as Migrações
 bash
 cd back-quiz
@@ -97,6 +98,12 @@ JWT
 Bcrypt
 
 Frontend:
+
+Html
+
+Css
+
+Java Script (Para manipulação de DOM)
 
 Bootstrap
 
