@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     score: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DOUBLE ,
       allowNull: false,
       validate: {
         min: 0,
