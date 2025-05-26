@@ -1,59 +1,66 @@
-Quiz Chico - Projeto de Quizzes Interativos
-📋 Visão Geral
-O Quiz Chico é uma plataforma web para criação e realização de quizzes com:
+# 🧠 Quiz Chico - Projeto de Quizzes Interativos
+### 📋 Visão Geral
+O Quiz Chico é uma plataforma web para criação e realização de quizzes implementador com:
 
-Frontend em HTML/CSS/JavaScript
+- Frontend em HTML/CSS/JavaScript
 
-Backend em Node.js com Express
+- Backend em Node.js com Express
 
-Banco de dados mysql com Sequelize ORM
+- Banco de dados mysql com Sequelize ORM
 
-🚀 Como Executar o Projeto Localmente
-Pré-requisitos
-Node.js (v16 ou superior)
+## 🚀 Como Executar o Projeto Localmente
 
-MYSQL
+### 📋 Pré-requisitos
 
-Git
+Antes de iniciar, certifique-se de ter instalado:
 
-1. Clone o Repositório
-bash
-git clone https://github.com/VictorSantosVK/quizChico/tree/master
-cd quiz-chico
-2. Instale as Dependências
-# Instale as dependências do backend
-cd back-quiz
-npm install
+- Node.js (versão recomendada: 18 ou superior)
+- MySQL
 
-# Instale as dependências do frontend (se necessário)
-cd ../front-quiz
-npm install  # Se usar algum bundler como Webpack
-3. Configure o Banco de Dados
-Crie um banco de dados MYSQL chamado quiz_chico
+### 📋 Instalação
 
-Configure o arquivo .env na pasta back-quiz:
+#### 🔧 Configuração do Banco de Dados
 
-.env
+1. Crie um banco de dados no MySQL.
+
+2. Acesse o arquivo de configuração:
+
+```sh
+back-quiz/config/config.json
+```
+
+3. Altere os dados de conexão (username, password, database) para os dados do seu banco de dados.
+
+#### 🔑 Configuração de Variáveis de Ambiente
+
+1. Crie um arquivo .env dentro da pasta back-quiz/.
+
+2. Adicione as seguintes variáveis:
+```sh
 PORT=3001
 JWT_SECRET=meujwtsecret
 JWT_EXPIRES_IN=1d
-
-4. Execute as Migrações
-bash
+```
+#### 📦 Instalação as dependências do backend
+```sh
 cd back-quiz
-npx sequelize-cli db:migrate
-5. Inicie os Servidores
-Backend:
-
-5. rode o Backend 
-cd back-quiz
+npm install
+```
+#### ▶️ Executar o Backend
+```sh
 npm run start
+```
+#### 🎨 Executar o Frontend
+1. Abra o arquivo de login no navegador:
+```sh
+front-quiz/public/login/login.html
+```
+💡 Dica: Utilize uma extensão de servidor local (como Live Server no VSCode) ou configure um servidor HTTP simples para rodar localmente.
 
-Frontend:
-Abra o arquivo front-quiz/login.html no navegador ou use um servidor local:
 
+## 📁 Estrutura do Projeto
 
-
+```sh
 quiz-chico/
 ├── back-quiz/               # Backend Node.js
 │   ├── config/
@@ -70,41 +77,30 @@ quiz-chico/
 │   ├── login/               # Páginas de autenticação
 │   ├── quizes/              # Páginas de quizzes
 │   ├── scripts/             # JavaScript do frontend
-│   └── styles/              # Folhas de estilo
+│   └── styles/              # Estilização
 │
 └── README.md                # Este arquivo
-🌟 Funcionalidades Principais
-✅ Autenticação de usuários
+```
+## 🌟 Funcionalidades 
 
-✅ Criação e edição de quizzes
+### Usuário 
+🔹 RF01: Cadastrar-se no sistema (nome, e-mail e senha)
 
-✅ Realização de quizzes com temporizador
+🔹 RF02: Fazer login e logout
 
-✅ Histórico de desempenho
+🔹 RF03: Visualizar a lista de quizzes disponíveis
 
-✅ Ranking dos usuários
+🔹 RF04: Responder quizzes (múltipla escolha)
 
-✅ Painel administrativo
+🔹 RF05: Ver resultado imediato após concluir o quiz
 
-🔧 Dependências Principais
-Backend:
+🔹 RF06: Acessar histórico de quizzes realizados e média de desempenho
 
-Express
+### Usuário Administrador
+🔸 RF07: Login de administrador
 
-Sequelize
+🔸 RF08: Criar, editar e excluir quizzes
 
-MYSQL
+🔸 RF09: Criar, editar e excluir questões
 
-JWT
-
-Bcrypt
-
-Frontend:
-
-Html
-
-Css
-
-Java Script (Para manipulação de DOM)
-
-Bootstrap
+🔸 RF10: Associar questões aos quizzes
