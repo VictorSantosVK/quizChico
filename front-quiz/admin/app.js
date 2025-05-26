@@ -6,33 +6,90 @@ window.editQuiz = function (quizId) {
   }
 };
 
-window.deleteQuiz = async function (quizId) {
-  if (!confirm("Tem certeza que deseja excluir este quiz?")) return;
+window.deleteQuiz = async function (quizId, event) {
+  // Previne comportamento padrão do evento
+  if (event) event.preventDefault();
+  
+  // Verificação do ID
+  if (!quizId || isNaN(quizId)) {
+    console.error('ID do quiz inválido:', quizId);
+    showNotification('ID do quiz inválido', 'error');
+    return;
+  }
 
+  // Obtém o botão de exclusão
+  const deleteButton = event ? event.currentTarget : 
+    document.querySelector(`button[onclick*="deleteQuiz(${quizId})"]`);
+
+  // Salva o estado original do botão
+  const originalButtonContent = deleteButton?.innerHTML;
+  
   try {
+    // Mostra estado de carregamento
+    if (deleteButton) {
+      deleteButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Excluindo...';
+      deleteButton.disabled = true;
+    }
+
+    // Confirmação customizada
+    const isConfirmed = await showDeleteConfirmation();
+    if (!isConfirmed) {
+      if (deleteButton) {
+        deleteButton.innerHTML = originalButtonContent;
+        deleteButton.disabled = false;
+      }
+      return;
+    }
+
+    // REQUISIÇÃO SIMPLIFICADA SEM TOKEN
     const response = await fetch(
       `http://localhost:3001/api/quizzes/${quizId}`,
       {
         method: "DELETE",
         headers: {
-          // Adicione se usar autenticação:
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Erro ao excluir quiz");
+    // Tratamento de erros
+    if (response.status === 404) {
+      throw new Error('Quiz não encontrado.');
     }
 
-    alert("Quiz excluído com sucesso!");
-    fetchQuizzes();
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `Erro ${response.status} ao excluir quiz`);
+    }
+
+    // Feedback visual
+    showNotification('Quiz excluído com sucesso!', 'success');
+    
+    // Recarrega a lista
+    await fetchQuizzes();
+
   } catch (error) {
-    console.error("Erro:", error);
-    alert(`Erro ao excluir quiz: ${error.message}`);
+    console.error('Erro ao excluir quiz:', error);
+    showNotification(`Falha ao excluir: ${error.message}`, 'error');
+    
+  } finally {
+    // Restaura o botão
+    if (deleteButton) {
+      deleteButton.innerHTML = originalButtonContent;
+      deleteButton.disabled = false;
+    }
   }
 };
+// Funções auxiliares (implementar conforme sua UI)
+async function showDeleteConfirmation() {
+  // Substituir por um modal personalizado na sua aplicação
+  return confirm('Tem certeza que deseja excluir este quiz? Esta ação não pode ser desfeita.');
+}
+
+function showNotification(message, type = 'success') {
+  // Substituir por um sistema de notificação toast na sua aplicação
+  alert(message); // Temporário - implementar um toast notification
+}
 
 // Variáveis globais
 let quizzes = [];
@@ -81,25 +138,20 @@ function renderQuizzes() {
   quizzes.forEach((quiz) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-                    <td>${quiz.title}</td>
-                    <td>${quiz.category}</td>
-                    
-                    <td>${quiz.questions?.length || 0}</td>
-                    <td>
-                        <div class="btn-group">
-                            <button class="btn btn-sm btn-primary" onclick="editQuiz(${
-                              quiz.id
-                            })">
-                                <i class="fas fa-edit"></i> Editar
-                            </button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteQuiz(${
-                              quiz.id
-                            })">
-                                <i class="fas fa-trash"></i> Excluir
-                            </button>
-                        </div>
-                    </td>
-                `;
+      <td>${quiz.title}</td>
+      <td>${quiz.category}</td>
+      <td>${quiz.questions?.length || 0}</td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-primary" onclick="editQuiz(${quiz.id})">
+            <i class="fas fa-edit"></i> Editar
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="deleteQuiz(${quiz.id}, event)">
+            <i class="fas fa-trash"></i> Excluir
+          </button>
+        </div>
+      </td>
+    `;
     tbody.appendChild(tr);
   });
 }
@@ -558,25 +610,84 @@ function editQuiz(quizId) {
   }
 }
 
-async function deleteQuiz(quizId) {
-  if (!confirm("Tem certeza que deseja excluir este quiz?")) return;
+async function deleteQuiz(quizId, event) {
+  // Melhorando a confirmação
+  const isConfirmed = await showConfirmationModal(
+    "Confirmar Exclusão",
+    "Tem certeza que deseja excluir este quiz? Esta ação não pode ser desfeita."
+  );
+  if (!isConfirmed) return;
+
+  // Adicionando estado de loading
+  const deleteButton = event?.target;
+  const originalText = deleteButton?.innerHTML;
+  if (deleteButton) {
+    deleteButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Excluindo...';
+    deleteButton.disabled = true;
+  }
 
   try {
+    // Adicionando headers de autenticação e conteúdo
+    const token = localStorage.getItem('token'); // Assumindo que você armazena o token
+    
     const response = await fetch(
       `http://localhost:3001/api/quizzes/${quizId}`,
       {
         method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Adicionando autenticação
+        }
       }
     );
 
-    if (!response.ok) throw new Error("Erro ao excluir quiz");
+    // Tratando diferentes tipos de respostas
+    if (response.status === 404) {
+      throw new Error("Quiz não encontrado");
+    }
 
-    alert("Quiz excluído com sucesso!");
-    fetchQuizzes();
+    if (response.status === 403) {
+      throw new Error("Você não tem permissão para excluir este quiz");
+    }
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Erro ao excluir quiz");
+    }
+
+    // Feedback visual melhorado
+    showToast("Quiz excluído com sucesso!", "success");
+    
+    // Recarregar a lista de quizzes
+    await fetchQuizzes();
+    
   } catch (error) {
-    console.error("Erro:", error);
-    alert(`Erro ao excluir quiz: ${error.message}`);
+    console.error("Erro ao excluir quiz:", error);
+    
+    // Feedback de erro mais informativo
+    showToast(`Falha ao excluir: ${error.message}`, "error");
+    
+    // Log adicional para debug
+    if (error.response) {
+      console.error("Detalhes do erro:", await error.response.json());
+    }
+  } finally {
+    // Restaurar estado do botão
+    if (deleteButton) {
+      deleteButton.innerHTML = originalText;
+      deleteButton.disabled = false;
+    }
   }
+}
+
+// Funções auxiliares (implemente conforme sua UI)
+async function showConfirmationModal(title, message) {
+  return confirm(message); // Temporário - use um modal personalizado
+}
+
+function showToast(message, type = "success") {
+
+  alert(message); // Temporário - use um sistema de notificação mais sofisticado
 }
 
 // Funções para gerenciar usuários

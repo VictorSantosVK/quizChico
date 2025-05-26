@@ -13,7 +13,6 @@ class AppServer {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 3001;
-
     this.initializeDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes();

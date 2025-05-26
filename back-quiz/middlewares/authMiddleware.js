@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
     req.user = {
       id: decoded.id,
       email: decoded.email,
-      role: decoded.role || 'user' // Padrão para 'user' se não especificado
+      role: decoded.role || 'user'
     };
     
     next();
