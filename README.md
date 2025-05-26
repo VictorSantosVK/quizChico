@@ -81,6 +81,7 @@ quiz-chico/
 │
 └── README.md                # Este arquivo
 ```
+
 ## 🌟 Funcionalidades 
 
 ### Usuário 
